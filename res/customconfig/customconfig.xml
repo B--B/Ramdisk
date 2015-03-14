@@ -783,7 +783,7 @@
 
 </settingsTab>
 
-<settingsTab name="PROFILES">
+<!-- <settingsTab name="PROFILES">
 
 	<settingsPane description="You can check which profile is used." name="Online Profile">
 
@@ -805,7 +805,7 @@
 
 	</settingsPane>
 
-</settingsTab>
+</settingsTab> -->
 
 <settingsTab name="BACKUP or RESTORE">
 
@@ -819,7 +819,7 @@
 
 </settingsTab>
 
-<settingsTab name="KERNEL THREAD and DONATION">
+<!-- <settingsTab name="KERNEL THREAD and DONATION">
 
 	<settingsPane description="@XDA Kernel Thread and Donation" name="@XDA Thread-Donation">
 
@@ -841,7 +841,7 @@
 
 	</settingsPane>
 
-</settingsTab>
+</settingsTab> -->
 
 </settingsRoot>
 
