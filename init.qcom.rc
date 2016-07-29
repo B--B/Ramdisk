@@ -121,24 +121,18 @@ on post-fs-data
 
     # WiFi TRP/TIS
     write /data/.psm.info 1
-    chown system root /data/.psm.info
+    hown root system /data/.psm.info
     chmod 0660 /data/.psm.info
 
     # WiFi Antena Selection
-    chown system root /data/.ant.info
+    chown root system /data/.ant.info
     chmod 0664 /data/.ant.info
 
     # WiFi Version
     write /data/.wifiver.info 0
-    chown system root /data/.wifiver.info
+    chown root system /data/.wifiver.info
     chmod 0664 /data/.wifiver.info
     restorecon /data/.wifiver.info
-
-    # WiFi Cert
-    chmod 0664 /data/.bustxglom.info
-    chmod 0664 /data/.roamoff.info
-    chmod 0664 /data/.frameburst.info
-    chmod 0664 /data/.txbf.info
 
     # WiFi MAC address
     mkdir /efs/wifi 0775 radio system
@@ -148,8 +142,6 @@ on post-fs-data
     # Create QCN WPA_supplicant symlink for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
     rm /data/system/wpa_supplicant
-
-    chown root radio /proc/cmdline
 
     setprop vold.post_fs_data_done 1
 
@@ -169,10 +161,10 @@ on boot
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
 
     # Bluetooth LPM
-    chmod 0220 /proc/bluetooth/sleep/lpm
-    chmod 0220 /proc/bluetooth/sleep/btwrite
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
+    chmod 0220 /proc/bluetooth/sleep/lpm
+    chmod 0220 /proc/bluetooth/sleep/btwrite
 
     # Create QMUX daemon socket area
     mkdir /dev/socket/qmux_audio 2770 media audio
@@ -184,30 +176,29 @@ on boot
     mkdir /data/misc/perfd 2770 root system
     mkdir /data/system/perfd 2770 root system
 
-    # Remove SUID bit for iproute2 ip tool
-    chmod 0755 /system/bin/ip
-
     # Change permissions for fps_level nodes
     chown system graphics /sys/class/graphics/fb0/msm_fb_fps_level
     chown system graphics /sys/class/graphics/fb1/msm_fb_fps_level
     chown system graphics /sys/class/graphics/fb2/msm_fb_fps_level
-    chmod 644 /sys/class/graphics/fb0/msm_fb_fps_level
-    chmod 400 /sys/class/graphics/fb1/msm_fb_fps_level
-    chmod 400 /sys/class/graphics/fb2/msm_fb_fps_level
+    chmod 0644 /sys/class/graphics/fb0/msm_fb_fps_level
+    chmod 0400 /sys/class/graphics/fb1/msm_fb_fps_level
+    chmod 0400 /sys/class/graphics/fb2/msm_fb_fps_level
 
     # YUV to RGB Conversion
-    chown system media_rw /sys/class/graphics/fb0/csc_cfg
+    chown system graphics /sys/class/graphics/fb0/csc_cfg
     chmod 0660 /sys/class/graphics/fb0/csc_cfg
 
     chown system graphics /sys/class/graphics/fb1/hpd
     chown system graphics /sys/class/graphics/fb1/vendor_name
     chown system graphics /sys/class/graphics/fb1/product_description
-    chown system system /sys/class/graphics/fb1/format_3d
+    chown system graphics /sys/class/graphics/fb1/format_3d
     chmod 0664 /sys/class/graphics/fb1/hpd
     chmod 0664 /sys/class/graphics/fb1/vendor_name
     chmod 0664 /sys/class/graphics/fb1/product_description
     chmod 0664 /sys/class/graphics/fb1/format_3d
     chmod 0664 /sys/class/graphics/fb1/video_mode
+
+    # Create symlink for fb1 as HDMI
     symlink /dev/graphics/fb1 /dev/graphics/hdmi
 
     # Inform the USB driver of the correct transport
@@ -235,17 +226,13 @@ on boot
     write /sys/module/rmnet_usb/parameters/rmnet_data_init 1
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
-    chown radio system /sys/class/sec/switch/usb_sel
-    chown radio system /sys/class/sec/switch/usb_state
-    chown radio system /sys/class/sec/switch/uart_sel
-    chown radio system /sys/class/sec/switch/apo_factory
-
-    # Control write performance boosting
-    chown system radio /sys/block/mmcblk0/bkops_en
-    chmod 0664 /sys/block/mmcblk0/bkops_en
+    chown system radio /sys/class/sec/switch/usb_sel
+    chown system radio /sys/class/sec/switch/usb_state
+    chown system radio /sys/class/sec/switch/uart_sel
+    chown system radio /sys/class/sec/switch/apo_factory
 
     # GPIO DVS
-    chown radio system /sys/class/secgpio_check/secgpio_check_all/secgpio_ctrl
+    chown system radio /sys/class/secgpio_check/secgpio_check_all/secgpio_ctrl
 
     # Chown polling nodes as needed from UI running on system server
     chown system system /sys/devices/platform/msm_sdcc.1/polling
@@ -257,32 +244,32 @@ on boot
     chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
 
-    # Disable software keys
-    chown root system /sys/class/leds/button-backlight/max_brightness
-    chmod 0664 /sys/class/leds/button-backlight/max_brightness
-
     # Torch
     chown system camera /sys/class/leds/torch-sec1/brightness
-    chmod 0666 /sys/class/leds/torch-sec1/brightness
+    chmod 0664 /sys/class/leds/torch-sec1/brightness
 
     # Backlight
     chown system system /sys/class/leds/button-backlight/brightness
     chown system system /sys/class/leds/lcd-backlight/brightness
 
+    chown root system /sys/class/leds/button-backlight/max_brightness
+    chmod 0664 /sys/class/leds/button-backlight/max_brightness
+
     # mDNIe
-    chown system system /sys/class/lcd/panel/window_type
-    chown radio system /sys/class/lcd/panel/power_reduce
-    chown radio system /sys/class/lcd/panel/siop_enable
-    chown radio system /sys/class/lcd/panel/temperature
     chown system system /sys/class/mdnie/mdnie/negative
-    chown system media_rw /sys/class/mdnie/mdnie/accessibility
-    chown system media_rw /sys/class/mdnie/mdnie/mode
-    chown system media_rw /sys/class/mdnie/mdnie/outdoor
-    chown system media_rw /sys/class/mdnie/mdnie/playspeed
-    chown system media_rw /sys/class/mdnie/mdnie/scenario
+    chown system system /sys/class/mdnie/mdnie/accessibility
+    chown system system /sys/class/mdnie/mdnie/mode
+    chown system system /sys/class/mdnie/mdnie/outdoor
+    chown system system /sys/class/mdnie/mdnie/playspeed
+    chown system system /sys/class/mdnie/mdnie/scenario
+
+    chown system system /sys/class/lcd/panel/window_type
+    chown system radio /sys/class/lcd/panel/power_reduce
+    chown system radio /sys/class/lcd/panel/siop_enable
+    chown system radio /sys/class/lcd/panel/temperature
 
     # Dynamic FPS
-    chown radio system /sys/class/lcd/panel/fps_change
+    chown system radio /sys/class/lcd/panel/fps_change
     chmod 0664 /sys/class/lcd/panel/fps_change
 
     # Auto-brightness
@@ -290,13 +277,12 @@ on boot
     chmod 0660 /sys/class/backlight/panel/auto_brightness
 
     # Touchscreen & touch keys
-    chown system system /sys/class/sec/sec_touchkey/keypad_enable
-    chmod 0660 /sys/class/sec/sec_touchkey/keypad_enable
-    chown radio system /sys/class/sec/sec_touchkey/touchkey_firm_update
-    chown radio system /sys/class/sec/sec_touchkey/touch_sensitivity
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_firm_update
+    chown system radio /sys/class/sec/sec_touchkey/touch_sensitivity
     chown system radio /sys/class/sec/sec_touchkey/flip_mode
     chown system radio /sys/class/sec/sec_touchkey/glove_mode
-    chown system radio /sys/class/sec/tsp/cmd
+    chown system system /sys/class/sec/sec_touchkey/keypad_enable
+    chmod 0660 /sys/class/sec/sec_touchkey/keypad_enable
 
     # TCP
     chown system system /sys/kernel/ipv4/tcp_wmem_min
@@ -390,14 +376,14 @@ on boot
     # Vibrator
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/class/timed_output/vibrator/pwm_default
-    chmod 0660 /sys/class/timed_output/vibrator/pwm_default
     chown system system /sys/class/timed_output/vibrator/pwm_max
-    chmod 0660 /sys/class/timed_output/vibrator/pwm_max
     chown system system /sys/class/timed_output/vibrator/pwm_min
-    chmod 0660 /sys/class/timed_output/vibrator/pwm_min
     chown system system /sys/class/timed_output/vibrator/pwm_threshold
-    chmod 0660 /sys/class/timed_output/vibrator/pwm_threshold
     chown system system /sys/class/timed_output/vibrator/pwm_value
+    chmod 0660 /sys/class/timed_output/vibrator/pwm_default
+    chmod 0660 /sys/class/timed_output/vibrator/pwm_max
+    chmod 0660 /sys/class/timed_output/vibrator/pwm_min
+    chmod 0660 /sys/class/timed_output/vibrator/pwm_threshold
     chmod 0660 /sys/class/timed_output/vibrator/pwm_value
 
     # Barcode emulation
@@ -410,7 +396,7 @@ on boot
     chown system radio /sys/class/sec/sec_ir/ir_send_result
 
     # RIL fast dormancy
-    chown system radio /sys/devices/virtual/sec/bamdmux/waketime
+    chown system radio /sys/class/sec/bamdmux/waketime
 
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
@@ -440,7 +426,7 @@ service time_daemon /system/bin/time_daemon
     group root
 
 service insthk /system/bin/insthk
-    class late_start
+    class core
     user root
     oneshot
     seclabel u:r:insthk_exec:s0
@@ -558,7 +544,7 @@ service macloader /system/bin/macloader
     oneshot
 
 on property:init.svc.macloader=stopped
-    chown system root /data/.rev
+    chown root system /data/.rev
     chmod 0664 /data/.rev
 
 service charger /sbin/healthd -c
