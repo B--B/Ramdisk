@@ -32,8 +32,7 @@ case $1 in
 		fi;
 	;;
 	reboot)
-		sync;
-		sync;
+		$BB sync;
 		$BB sleep 1;
 		reboot $2;
 	;;

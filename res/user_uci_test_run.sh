@@ -16,7 +16,7 @@ $BB chown -R root:system /res/customconfig/actions/;
 $BB chmod -R 06755 /res/customconfig/actions/;
 $BB mv /res/customconfig/actions/push-actions/* /res/no-push-on-boot/;
 $BB chmod 06755 /res/no-push-on-boot/*;
-/sbin/bb/busybox cp /res/misc_scripts/config_backup_restore /res/customconfig/actions/push-actions/;
+$BB cp /res/misc_scripts/config_backup_restore /res/customconfig/actions/push-actions/;
 $BB chmod 06755 /res/customconfig/actions/push-actions/config_backup_restore;
 
 ACTION_SCRIPTS=/res/customconfig/actions;
@@ -32,7 +32,7 @@ write_config;
 
 # restore all the PUSH Button Actions back to there location
 $BB mv /res/no-push-on-boot/* /res/customconfig/actions/push-actions/;
-pkill -f "com.gokhanmoral.stweaks.app";
+$BB pkill -f "com.gokhanmoral.stweaks.app";
 
-/sbin/bb/busybox mount -o remount,ro /system;
+$BB mount -o remount,ro /system;
 

@@ -272,7 +272,7 @@ case "${debug_to_sd}" in
 			# System
 			$BB echo "System-Info:" >> $DEBUG_FILE;
 			$BB echo "sysctl:" >> $DEBUG_FILE;
-			$BB sysctl -a | grep -v net.* >> $DEBUG_FILE;
+			$BB sysctl -a | $BB grep -v net.* >> $DEBUG_FILE;
 			$BB echo "" >> $DEBUG_FILE;
 			$BB echo "getprop:" >> $DEBUG_FILE;
 			getprop >> $DEBUG_FILE;
