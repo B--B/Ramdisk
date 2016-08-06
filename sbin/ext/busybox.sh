@@ -9,25 +9,6 @@ if [ "$($BB mount | $BB grep system | $BB grep -c ro)" -eq "1" ]; then
 	$BB mount -o remount,rw /system;
 fi;
 
-CLEAN_BUSYBOX()
-{
-	for f in *; do
-		case "$($BB readlink "$f")" in *usybox*)
-			$BB rm "$f"
-		;;
-		esac
-	done;
-}
-
-# Cleanup the old busybox symlinks
-cd /system/xbin/;
-CLEAN_BUSYBOX;
-
-cd /system/bin/;
-CLEAN_BUSYBOX;
-
-cd /;
-
 if [ -e /system/xbin/wget ]; then
 	$BB rm /system/xbin/wget;
 fi;
