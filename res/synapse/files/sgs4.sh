@@ -1,6 +1,6 @@
-#!/sbin/busybox sh
+#!/sbin/bb/busybox sh
 
-BB=/sbin/busybox;
+BB=/sbin/bb/busybox;
 
 case "$1" in
 	LiveCPUFrequencyList)

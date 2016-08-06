@@ -1,4 +1,4 @@
-#!/sbin/busybox sh
+#!/sbin/bb/busybox sh
 # custom script helper by Gokhan Moral
 
 DEFAULT_PROFILE="/res/customconfig/default.profile";
