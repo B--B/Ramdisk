@@ -33,7 +33,7 @@ if [ "$WGET_CHECK1" -eq "1" ] || [ "$WGET_CHECK2" -eq "1" ] || [ "$WGET_CHECK3" 
 		$BB echo "Problem: no internet connection! connect and try again";
 	else
 		wget http://winhelp2002.mvps.org/hosts.zip -O $TMPFILE > /dev/null 2>&1;
-		unzip -p $TMPFILE HOSTS > $HOST_FILE;
+		$BB unzip -p $TMPFILE HOSTS > $HOST_FILE;
 		$BB chmod 644 $HOST_FILE;
 		$BB dos2unix -u /system/etc/hosts;
 		$BB echo "AD Blocker: installed to /system/etc/hosts, reboot to use.";
