@@ -433,9 +433,9 @@ service insthk /system/bin/insthk
 
 # Run Kernel and ROM Tunings
 service qcom-post-boot /sbin/bb/busybox sh /sbin/ext/busybox.sh
+    class late_start
     user root
     group root
-    disabled
     oneshot
 
 # LEDify
@@ -444,9 +444,6 @@ service ledify /system/bin/ledify
     user root
     group shell
     oneshot
-
-on property:sys.boot_completed=1
-    start qcom-post-boot
 
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
