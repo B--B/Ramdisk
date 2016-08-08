@@ -25,7 +25,7 @@ case "${debug_to_sd}" in
 	1)
 		(
 			# needed for /system/xbin/zip chmod
-			if [ "$($BB mount | grep system | grep -c ro)" -eq "1" ]; then
+			if [ "$($BB mount | $BB grep system | $BB grep -c ro)" -eq "1" ]; then
 				$BB mount -o remount,rw /system;
 			fi;
 
@@ -361,7 +361,7 @@ case "${debug_to_sd}" in
 
 			# System
 			$BB echo "ROM-Version:" >> $ACTIVE_DEBUG_FILE;
-			cat init.rc | $BB grep "# THIS INIT.RC is FOR" >> $ACTIVE_DEBUG_FILE;
+			$BB cat init.rc | $BB grep "# THIS INIT.RC is FOR" >> $ACTIVE_DEBUG_FILE;
 			getprop ro.build.description >> $ACTIVE_DEBUG_FILE;
 			getprop ro.build.date >> $ACTIVE_DEBUG_FILE;
 			getprop ro.build.display.id >> $ACTIVE_DEBUG_FILE;
