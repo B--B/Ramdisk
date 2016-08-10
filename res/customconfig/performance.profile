@@ -151,7 +151,6 @@ cron_reset_systemui=off
 cron_fstrim=off
 cron_process_reclaim=on
 cron_ram_release=off
-reset_battery=on
 ad_block_update=off
 cron_db_optimizing=off
 cron_clear_app_cache=on

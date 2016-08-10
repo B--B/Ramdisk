@@ -925,9 +925,6 @@
 		<checkbox description="Enable restarting Google Service to prevent memory leaks and CPU nonstop activity. This is one of the MAIN LP RAM leak BUGS. Service gets stuck, drains RAM and force CPU to work nonstop." name="Restart Google Service"
 			action="generic_cortex /tmp/cron_ram_release" label="Restart LP Google Service in every 8 hours"/>
 
-		<checkbox description="Enable Battery Calibration every week at SAT 6:00 AM, in order to correct wrong calculations or remaining charging time." name="Calibrate Battery"
-			action="generic_cortex /tmp/reset_battery" label="Calibrate Battery every week"/>
-
 		<checkbox description="Cron that updates AD-BLOCKER every week at SAT 6:00 AM, from official site. The cron will check if phone is connected to the internet, otherwise it will try to use WIFI! Script turns WIFI and DATA on, wait for connection and update and when it's finished, turns WIFI OFF. If there is no connection, an error will be written into the log. If you use other app for blocking adds, no need to use it." name="Update AD-Block"
 			action="generic_cortex /tmp/ad_block_update" label="Update AD-BLOCKER every week"/>
 

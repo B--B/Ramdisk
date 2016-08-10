@@ -1,9 +1,9 @@
 #!/sbin/bb/busybox sh
 
-PROFILE=$(cat /data/.alucard/.active.profile);
-. /data/.alucard/${PROFILE}.profile;
-
 BB=/sbin/bb/busybox
+
+PROFILE=$($BB cat /data/.alucard/.active.profile);
+. /data/.alucard/${PROFILE}.profile;
 
 if [ "$ad_block_update" == "on" ]; then
 

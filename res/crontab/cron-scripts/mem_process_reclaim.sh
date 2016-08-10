@@ -3,7 +3,7 @@
 
 (
 	BB=/sbin/bb/busybox
-	PROFILE=$(cat /data/.alucard/.active.profile);
+	PROFILE=$($BB cat /data/.alucard/.active.profile);
 	. /data/.alucard/${PROFILE}.profile;
 
 	if [ ! -f /system/xbin/su ]; then
@@ -11,7 +11,7 @@
 	fi;
 
 	if [ "$cron_process_reclaim" == "on" ]; then
-		for i in $(ls /proc/ | $BB grep -E '^[0-9]+'); do
+		for i in $($BB ls /proc/ | $BB grep -E '^[0-9]+'); do
 			if [ "$i" -ge "1500" ] && [ -f /proc/$i/reclaim ]; then
 				su -c echo "all" > /proc/$i/reclaim;
 			fi;

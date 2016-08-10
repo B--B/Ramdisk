@@ -2,7 +2,7 @@
 
 (
 	BB=/sbin/bb/busybox
-	PROFILE=$(cat /data/.alucard/.active.profile);
+	PROFILE=$($BB cat /data/.alucard/.active.profile);
 	. /data/.alucard/${PROFILE}.profile;
 
 	if [ "$cron_ram_release" == "on" ]; then

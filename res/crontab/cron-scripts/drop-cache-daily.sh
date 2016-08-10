@@ -2,8 +2,8 @@
 
 (
 	BB=/sbin/bb/busybox
-	MEM_ALL=`free | $BB grep Mem | $BB awk '{ print $2 }'`;
-	MEM_USED=`free | $BB grep Mem | $BB awk '{ print $3 }'`;
+	MEM_ALL=`$BB free | $BB grep Mem | $BB awk '{ print $2 }'`;
+	MEM_USED=`$BB free | $BB grep Mem | $BB awk '{ print $3 }'`;
 	MEM_USED_CALC=$(($MEM_USED*100/$MEM_ALL));
 
 	# do clean cache only if cache uses 50% of free memory.

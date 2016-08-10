@@ -3,11 +3,11 @@
 
 (
 	BB=/sbin/bb/busybox
-	PROFILE=$(cat /data/.alucard/.active.profile);
+	PROFILE=$($BB cat /data/.alucard/.active.profile);
 	. /data/.alucard/${PROFILE}.profile;
 
 	if [ "$cron_clear_app_cache" == "on" ]; then
-		CACHE_JUNK=$(ls -d /data/data/*/cache)
+		CACHE_JUNK=$($BB ls -d /data/data/*/cache)
 		for i in $CACHE_JUNK; do
 			$BB rm -rf $i/*
 		done;
