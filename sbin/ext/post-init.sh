@@ -69,6 +69,9 @@ OPEN_RW;
 $BB echo "512" > /proc/sys/kernel/random/read_wakeup_threshold;
 $BB echo "256" > /proc/sys/kernel/random/write_wakeup_threshold;
 
+# start CROND by tree root, so it's will not be terminated.
+$BB sh /res/crontab_service/service.sh;
+
 # some nice thing for dev
 if [ ! -e /cpufreq ]; then
 	$BB ln -s /sys/devices/system/cpu/cpu0/cpufreq/ /cpufreq;
@@ -127,7 +130,7 @@ fi;
 # just set numer $RESET_MAGIC + 1 and profiles will be reset one time on next boot with new kernel.
 # incase that ADMIN feel that something wrong with global STweaks config and profiles, then ADMIN can add +1 to CLEAN_ALU_DIR
 # to clean all files on first boot from /data/.alucard/ folder.
-RESET_MAGIC=5;
+RESET_MAGIC=6;
 CLEAN_ALU_DIR=2;
 
 if [ ! -e /data/.alucard/reset_profiles ]; then
