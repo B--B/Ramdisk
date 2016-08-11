@@ -16,7 +16,7 @@
 				su -c echo "all" > /proc/$i/reclaim;
 			fi;
 		done;
-		$BB date +%H:%M-%D > /data/crontab/cron-mem-process-reclaim;
+		date +%H:%M-%D > /data/crontab/cron-mem-process-reclaim;
 		$BB echo "Done! Ram Reclaimed." >> /data/crontab/cron-mem-process-reclaim;
 	fi;
 )&

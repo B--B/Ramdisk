@@ -11,7 +11,7 @@
 			/system/xbin/sqlite3 $i 'REINDEX;' > /dev/null;
 		done;
 
-		$BB date +%H:%M-%D > /data/crontab/cron-db-optimizing;
+		date +%H:%M-%D > /data/crontab/cron-db-optimizing;
 		$BB echo "Done! DB was successfully Optimized." >> /data/crontab/cron-db-optimizing;
 		$BB sync;
 	fi;

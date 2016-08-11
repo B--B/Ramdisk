@@ -125,7 +125,7 @@ export TZ
 if [ "$($BB pidof crond | $BB wc -l)" -eq "0" ]; then
 	$BB nohup /sbin/bb/crond -c /var/spool/cron/crontabs/ > /data/.alucard/cron.txt &
 	$BB sleep 1;
-	PIDOFCRON=$(pidof crond);
+	PIDOFCRON=$($BB pidof crond);
 	if [ -f /system/xbin/su ]; then
 		su -c echo "-900" > /proc/"$PIDOFCRON"/oom_score_adj;
 	fi;

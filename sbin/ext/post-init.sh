@@ -191,12 +191,12 @@ read_config;
 
 # Load parameters for Synapse
 DEBUG=/data/.alucard/;
-BUSYBOX_VER=$(busybox | $BB grep "BusyBox v" | $BB cut -c0-15);
+BUSYBOX_VER=$($BB busybox | $BB grep "BusyBox v" | $BB cut -c0-15);
 $BB echo "$BUSYBOX_VER" > $DEBUG/busybox_ver;
 
 # start CORTEX by tree root, so it's will not be terminated.
 $BB sed -i "s/cortexbrain_background_process=[0-1]*/cortexbrain_background_process=1/g" /sbin/ext/cortexbrain-tune.sh;
-if [ "$(pgrep -f "cortexbrain-tune.sh" | $BB wc -l)" -eq "0" ]; then
+if [ "$($BB pgrep -f "cortexbrain-tune.sh" | $BB wc -l)" -eq "0" ]; then
 	$BB nohup $BB sh /sbin/ext/cortexbrain-tune.sh > /data/.alucard/cortex.txt &
 fi;
 

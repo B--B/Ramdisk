@@ -96,7 +96,7 @@ if [ "a$1" != "a" ]; then
 	cron_localtime () {
 		local localtime=$1;
 		shift;
-		$BB date --date=@$($BB date --date="$localtime" +%s) "+%-M %-H * * *    $*";
+		date --date=@$(date --date="$localtime" +%s) "+%-M %-H * * *    $*";
 	}
 
 	plan_cron_job () {
@@ -104,14 +104,14 @@ if [ "a$1" != "a" ]; then
 		shift;
 		local your_cron_job=$*;
 
-		local tmpfile=$(mktemp);
-		crontab -l > $tmpfile;
+		local tmpfile=$($BB mktemp);
+		$BB crontab -l > $tmpfile;
 		# edit it, for example, cut existing job with sed
 		$BB sed -i "\~$your_cron_job~ d" $tmpfile;
 		cron_localtime $desired_time $your_cron_job >> $tmpfile;
-		crontab $tmpfile;
+		$BB crontab $tmpfile;
 		$BB rm -f $tmpfile;
-		crontab -l;
+		$BB crontab -l;
 	}
 	plan_cron_job $1 $2
 else

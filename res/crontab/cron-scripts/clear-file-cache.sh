@@ -16,7 +16,7 @@
 		$BB rm -f /data/tombstones/*;
 		$BB rm -f /data/anr/*;
 		$BB rm -f /data/system/dropbox/*;
-		$BB date +%H:%M-%D > /data/crontab/cron-clear-file-cache;
+		date +%H:%M-%D > /data/crontab/cron-clear-file-cache;
 		$BB echo "Done! Cleaned Apps Cache." >> /data/crontab/cron-clear-file-cache;
 		$BB sync;
 	fi;
