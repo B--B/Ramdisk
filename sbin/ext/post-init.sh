@@ -197,7 +197,7 @@ $BB echo "$BUSYBOX_VER" > $DEBUG/busybox_ver;
 # start CORTEX by tree root, so it's will not be terminated.
 $BB sed -i "s/cortexbrain_background_process=[0-1]*/cortexbrain_background_process=1/g" /sbin/ext/cortexbrain-tune.sh;
 if [ "$($BB pgrep -f "cortexbrain-tune.sh" | $BB wc -l)" -eq "0" ]; then
-	$BB nohup $BB sh /sbin/ext/cortexbrain-tune.sh > /data/.alucard/cortex.txt &
+	$BB nohup /sbin/bb/sh /sbin/ext/cortexbrain-tune.sh > /data/.alucard/cortex.txt &
 fi;
 
 OPEN_RW;
@@ -258,11 +258,11 @@ OPEN_RW;
 $BB chmod -R 755 /system/etc/init.d/;
 if [ "$init_d" == "on" ]; then
 	(
-		$BB nohup $BB run-parts /system/etc/init.d/ > /data/.alucard/init.d.txt &
+		$BB nohup /sbin/bb/run-parts /system/etc/init.d/ > /data/.alucard/init.d.txt &
 	)&
 else
 	if [ -e /system/etc/init.d/99SuperSUDaemon ]; then
-		$BB nohup $BB sh /system/etc/init.d/99SuperSUDaemon > /data/.alucard/root.txt &
+		$BB nohup /sbin/bb/sh /system/etc/init.d/99SuperSUDaemon > /data/.alucard/root.txt &
 	else
 		$BB echo "no root script in init.d";
 	fi;
