@@ -36,9 +36,6 @@ $BB echo "cache:x:2001:cache" >> /system/etc/group;
 $BB chmod 755 /system/etc/group;
 $BB chown 0:0 /system/etc/group;
 
-# Install latest busybox
-/sbin/bb/busybox --install -s /sbin/bb/
-
 if [ -e /system/xbin/wget ]; then
 	$BB rm /system/xbin/wget;
 fi;
@@ -46,7 +43,6 @@ if [ -e /system/wget/wget ]; then
 	$BB chmod 755 /system/wget/wget;
 	$BB ln -s /system/wget/wget /system/xbin/wget;
 fi;
-chmod 06755 /bin/bb/busybox;
 if [ -e /system/xbin/su ]; then
 	$BB chmod 06755 /system/xbin/su;
 fi;

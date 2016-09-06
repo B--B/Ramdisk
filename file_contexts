@@ -168,9 +168,9 @@
 /system/xbin/procrank   u:object_r:procrank_exec:s0
 /system/xbin/perfprofd  u:object_r:perfprofd_exec:s0
 /system/xbin/simpleperf u:object_r:system_file:s0
-/system/xbin/zip	u:object_r:rootfs:s0
+/system/xbin/zip	u:object_r:system_file:s0
 /system/vendor/bin/gpsd u:object_r:gpsd_exec:s0
-/system/xbin/wget       u:object_r:rootfs:s0
+/system/xbin/wget       u:object_r:system_file:s0
 /system/bin/dnsmasq     u:object_r:dnsmasq_exec:s0
 /system/bin/hostapd     u:object_r:hostapd_exec:s0
 /system/bin/clatd	u:object_r:clatd_exec:s0
@@ -187,6 +187,7 @@
 /system/bin/sgdisk      u:object_r:sgdisk_exec:s0
 /system/bin/blkid       u:object_r:blkid_exec:s0
 /system/bin/tzdatacheck u:object_r:tzdatacheck_exec:s0
+/system/bin/ledify      u:object_r:system_file:s0
 
 #############################
 # Vendor files
