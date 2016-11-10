@@ -28,7 +28,7 @@ debug.atrace.tags.enableflags=0
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
-ro.bootimage.build.date=lun 7 nov 2016, 23.03.45, CET
-ro.bootimage.build.date.utc=1478556225
-ro.bootimage.build.fingerprint=samsung/jdc_jflte/jflte:7.1/NDE63P/b--b11072303:userdebug/test-keys
+ro.bootimage.build.date=gio 10 nov 2016, 22.42.25, CET
+ro.bootimage.build.date.utc=1478814145
+ro.bootimage.build.fingerprint=samsung/jdc_jflte/jflte:7.1/NDE63X/b--b11102242:userdebug/test-keys
 persist.sys.usb.config=adb
