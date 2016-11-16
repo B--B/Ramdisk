@@ -201,8 +201,7 @@ persist.data                  u:object_r:radio_prop:s0
 #line 1 "/media/b--b/Android/N/out/target/product/jflte/obj/ETC/sectxfile_nl_intermediates/sectxfile_nl"
 
 #line 1 "device/samsung/jflte/sepolicy/property_contexts"
-persist.sys.camera.preview	u:object_r:camera_prop:s0
-sys.qseecomd.enable		u:object_r:qseecomd_prop:s0
+persist.sys.camera.preview        u:object_r:camera_prop:s0
 #line 1 "/media/b--b/Android/N/out/target/product/jflte/obj/ETC/sectxfile_nl_intermediates/sectxfile_nl"
 
 #line 1 "vendor/aosp/sepolicy/property_contexts"
