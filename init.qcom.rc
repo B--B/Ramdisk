@@ -38,8 +38,7 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
-    # Use this trick to get a running rild
-    export LD_SHIM_LIBS /system/lib/libril.so|libril_jflte.so
+    export LD_SHIM_LIBS /system/lib/libril.so|libshim_ril.so
 
     # Set permissions for efs partition
     mkdir /efs 0771 system radio
@@ -48,10 +47,7 @@ on init
 
 on fs
     mount_all fstab.qcom
-    setprop ro.product.name jflte
-
-    chown system radio /dev/block/platform/msm_sdcc.1/by-name
-    chmod 0775 /dev/block/platform/msm_sdcc.1/by-name
+    setprop ro.product.name jgedlteue
 
 on post-fs-data
     # Create directories for tombstone
@@ -157,15 +153,19 @@ on early-boot
     setprop qcom.audio.init complete
 
 on boot
-    # Configure bluetooth
-    chmod 0660 /proc/bluetooth/sleep/lpm
-    chmod 0660 /proc/bluetooth/sleep/btwrite
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
-    chmod 0660 /dev/ttyHS0
+    chown bluetooth bluetooth /proc/bluetooth/sleep/proto
+    chmod 0660 /proc/bluetooth/sleep/proto
+    chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
+    chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
+
+    # Bluetooth LPM
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /dev/ttyHS0
+    chmod 0220 /proc/bluetooth/sleep/lpm
+    chmod 0220 /proc/bluetooth/sleep/btwrite
 
     # Create QMUX daemon socket area
     mkdir /dev/socket/qmux_audio 2770 media audio
@@ -275,6 +275,8 @@ on boot
     chown system radio /sys/class/sec/sec_touchkey/glove_mode
     chown system system /sys/class/sec/sec_touchkey/keypad_enable
     chmod 0660 /sys/class/sec/sec_touchkey/keypad_enable
+
+    chown system radio /sys/class/sec/tsp/cmd
 
     # TCP
     chown system system /sys/kernel/ipv4/tcp_wmem_min
@@ -398,7 +400,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 service mpdecision /system/bin/mpdecision --avg_comp
     class main
     user root
-    group system readproc
+    group system
     disabled
 
 service kickstart /system/bin/qcks -i /firmware-mdm/image/
@@ -425,10 +427,8 @@ service insthk /system/bin/insthk
     user root
     disabled
     oneshot
-    seclabel u:r:insthk_exec:s0
+    seclabel u:r:insthk:s0
 
-on property:sys.qseecomd.enable=true
-    start insthk
 
 # Run Kernel and ROM Tunings
 service qcom-post-boot /sbin/bb/busybox sh /sbin/ext/busybox.sh
@@ -446,11 +446,14 @@ service kernel-bb /sbin/ext/bb.sh
 
 # LEDify
 service ledify /system/bin/ledify
-    class late_start
-    user root
-    group shell
-    seclabel u:r:init:s0
-    oneshot
+     class late_start
+     user root
+     group shell
+     seclabel u:r:init:s0
+     oneshot
+
+on property:sys.qseecomd.enable=true
+    start insthk
 
 on property:sys.boot_completed=1
     start qcom-post-boot
@@ -463,20 +466,11 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
     class main
-    user radio
-    group radio audio bluetooth gps qcom_diag log wakelock
+    user root
+    group radio audio bluetooth gps qcom_diag log
 
 service netmgrd /system/bin/netmgrd
     class main
-
-# Start ril-daemon
-service ril-daemon /system/bin/rild
-    class main
-    socket rild stream 660 root radio
-    socket sap_uim_socket1 stream 660 bluetooth bluetooth
-    socket rild-debug stream 660 radio system
-    user root
-    group radio cache inet misc audio log qcom_diag
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
@@ -513,7 +507,7 @@ service wpa_supplicant /system/bin/wpa_supplicant -g@android:wpa_wlan0 \
 service macloader /system/bin/macloader
     class main
     oneshot
-    seclabel u:r:macloader_exec:s0
+    seclabel u:r:macloader:s0
 
 on property:init.svc.macloader=stopped
     chown root system /data/.rev
@@ -528,6 +522,6 @@ service thermal-engine /system/bin/thermal-engine
     user root
     group root
 
-# Disable boot timeout for external modems.
+# Disable boot timeout for external modems
 on property:persist.sys.mdm.timeout_disable=1
     write /sys/module/mdm_common/parameters/disable_boot_timeout 1
