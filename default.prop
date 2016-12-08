@@ -2,6 +2,7 @@
 # ADDITIONAL_DEFAULT_PROPERTIES
 #
 ro.adb.secure=0
+ro.device.cache_dir=/data/cache
 ro.secure=0
 security.perf_harden=0
 ro.allow.mock.location=0
@@ -28,7 +29,7 @@ debug.atrace.tags.enableflags=0
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
-ro.bootimage.build.date=sab 26 nov 2016, 02.12.14, CET
-ro.bootimage.build.date.utc=1480122734
-ro.bootimage.build.fingerprint=samsung/jdc_jflte/jflte:7.1/NDE63X/b--b11260212:userdebug/release-keys
+ro.bootimage.build.date=gio 8 dic 2016, 03.37.28, CET
+ro.bootimage.build.date.utc=1481164648
+ro.bootimage.build.fingerprint=samsung/jdc_jflte/jflte:7.1.1/NMF26O/b--b12080337:userdebug/release-keys
 persist.sys.usb.config=adb
