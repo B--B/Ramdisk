@@ -29,7 +29,7 @@ debug.atrace.tags.enableflags=0
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
-ro.bootimage.build.date=lun 20 feb 2017, 18.55.39, CET
-ro.bootimage.build.date.utc=1487613339
-ro.bootimage.build.fingerprint=samsung/jdc_jflte/jflte:7.1.1/NMF26V/b--b02201855:userdebug/release-keys
+ro.bootimage.build.date=mar 21 feb 2017, 12.37.25, CET
+ro.bootimage.build.date.utc=1487677045
+ro.bootimage.build.fingerprint=samsung/jdc_jflte/jflte:7.1.1/NMF26V/b--b02211237:userdebug/release-keys
 persist.sys.usb.config=adb
