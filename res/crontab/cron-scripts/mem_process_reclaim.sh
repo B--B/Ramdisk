@@ -6,7 +6,7 @@
 	PROFILE=$($BB cat /data/.b--b/.active.profile);
 	. /data/.b--b/${PROFILE}.profile;
 
-	if [ ! -f /system/xbin/su ]; then
+	if [ ! -f /su/bin/su ]; then
 		exit 1;
 	fi;
 
