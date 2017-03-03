@@ -53,18 +53,22 @@ on init
     mount cgroup none /dev/stune schedtune
     mkdir /dev/stune/foreground
     mkdir /dev/stune/background
+    mkdir /dev/stune/system-background
     mkdir /dev/stune/top-app
     chown system system /dev/stune
     chown system system /dev/stune/foreground
     chown system system /dev/stune/background
+    chown system system /dev/stune/system-background
     chown system system /dev/stune/top-app
     chown system system /dev/stune/tasks
     chown system system /dev/stune/foreground/tasks
     chown system system /dev/stune/background/tasks
+    chown system system /dev/stune/system-background/tasks
     chown system system /dev/stune/top-app/tasks
     chmod 0664 /dev/stune/tasks
     chmod 0664 /dev/stune/foreground/tasks
     chmod 0664 /dev/stune/background/tasks
+    chmod 0664 /dev/stune/system-background/tasks
     chmod 0664 /dev/stune/top-app/tasks
 
     # Mount staging areas for devices managed by vold
@@ -464,6 +468,7 @@ on post-fs-data
     mkdir /data/system 0775 system system
     mkdir /data/system/heapdump 0700 system system
     mkdir /data/system/users 0775 system system
+    mkdir /data/system/theme 0755 system system
 
     mkdir /data/system_de 0770 system system
     mkdir /data/system_ce 0770 system system
