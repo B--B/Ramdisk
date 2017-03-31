@@ -43,8 +43,8 @@ if [ -e /system/wget/wget ]; then
 	$BB chmod 755 /system/wget/wget;
 	$BB ln -s /system/wget/wget /system/xbin/wget;
 fi;
-if [ -e /su/bin/su ]; then
-	$BB chmod 06755 /su/bin/su;
+if [ -e /sbin/su ]; then
+	$BB chmod 06755 /sbin/su;
 fi;
 if [ -e /su/bin/daemonsu ]; then
 	$BB chmod 06755 /su/bin/daemonsu;
