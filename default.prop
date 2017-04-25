@@ -1,7 +1,6 @@
 #
 # ADDITIONAL_DEFAULT_PROPERTIES
 #
-ro.adb.secure=0
 ro.device.cache_dir=/data/cache
 ro.secure=0
 security.perf_harden=0
@@ -29,6 +28,6 @@ debug.atrace.tags.enableflags=0
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
-ro.bootimage.build.date=gio 20 apr 2017, 22.44.01, CEST
-ro.bootimage.build.date.utc=1492721041
+ro.bootimage.build.date=mar 25 apr 2017, 22.16.37, CEST
+ro.bootimage.build.date.utc=1493151397
 persist.sys.usb.config=adb
