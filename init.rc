@@ -128,6 +128,7 @@ on init
     write /proc/sys/kernel/sched_child_runs_first 0
 
     write /proc/sys/kernel/randomize_va_space 2
+    write /proc/sys/kernel/kptr_restrict 2
     write /proc/sys/vm/mmap_min_addr 32768
     write /proc/sys/net/ipv4/ping_group_range "0 2147483647"
     write /proc/sys/net/unix/max_dgram_qlen 600
@@ -240,7 +241,7 @@ on init
     # expecting it to point to /proc/self/fd
     symlink /proc/self/fd /dev/fd
 
-    export DOWNLOAD_CACHE /data/cache
+    export DOWNLOAD_CACHE ${ro.device.cache_dir}
 
     # set RLIMIT_NICE to allow priorities from 19 to -20
     setrlimit 13 40 40
