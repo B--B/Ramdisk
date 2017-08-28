@@ -25,7 +25,7 @@ ro.device.cache_dir=/data/cache
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
-ro.bootimage.build.date=sab 26 ago 2017, 17.36.20, CEST
-ro.bootimage.build.date.utc=1503761780
-ro.bootimage.build.fingerprint=samsung/jdc_jflte/jflte:8.0.0/OPR6.170623.012/27b1732fc5:userdebug/test-keys
+ro.bootimage.build.date=lun 28 ago 2017, 19.54.10, CEST
+ro.bootimage.build.date.utc=1503942850
+ro.bootimage.build.fingerprint=samsung/jdc_jflte/jflte:8.0.0/OPR6.170623.012/f4d1416acf:userdebug/test-keys
 persist.sys.usb.config=adb
