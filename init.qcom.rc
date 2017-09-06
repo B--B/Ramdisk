@@ -383,6 +383,9 @@ on boot
     # RIL fast dormancy
     chown system radio /sys/class/sec/bamdmux/waketime
 
+    # Wifi firmware reload path
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
+
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
