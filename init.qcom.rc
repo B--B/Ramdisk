@@ -387,9 +387,6 @@ on boot
     # RIL fast dormancy
     chown system radio /sys/class/sec/bamdmux/waketime
 
-    # Wifi firmware reload path
-    chown wifi wifi /sys/module/wlan/parameters/fwpath
-
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
@@ -470,21 +467,19 @@ service netmgrd /system/bin/netmgrd
     class main
 
 # Start ril-daemon
-service ril-daemon /system/bin/rild
+service ril-daemon /vendor/bin/hw/rild
     class main
     socket rild stream 660 root radio
     socket sap_uim_socket1 stream 660 bluetooth bluetooth
     socket rild-debug stream 660 radio system
     user root
-    group radio cache inet misc audio log readproc wakelock diag
+    group radio cache inet misc audio log readproc wakelock diag oem_2901
+    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
-
-# Wifi firmware reload path
-    chown wifi wifi /sys/module/wlan/parameters/fwpath
 
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -518,6 +513,10 @@ service thermal-engine /system/bin/thermal-engine
     class main
     user root
     group root
+
+on property:wlan.driver.status=ok
+    # Wifi firmware reload path
+    chown wifi wifi /sys/module/dhd/parameters/firmware_path
 
 # Disable boot timeout for external modems.
 on property:persist.sys.mdm.timeout_disable=1
